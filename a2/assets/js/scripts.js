@@ -38,22 +38,20 @@
       });
     }
 
-    const galleryImages = document.querySelectorAll('.gallery-img, #detailThumb');
     const modalEl = document.getElementById('imageModal');
     const modalImg = document.getElementById('modalImage');
     const modalCaption = document.getElementById('modalCaption');
-    if (galleryImages.length && modalEl){
+    if (modalEl && modalImg){
       const modal = new bootstrap.Modal(modalEl);
-      galleryImages.forEach(function(img){
+      document.querySelectorAll('.gallery-img, #detailThumb').forEach(function(img){
         img.addEventListener('click', function(e){
-          if (img.classList.contains('gallery-img')) { e.preventDefault(); }
+          if (img.classList.contains('gallery-img')){ e.preventDefault(); }
           const full = img.getAttribute('data-full') || img.getAttribute('src');
-          if (modalImg){ modalImg.src = full; modalImg.alt = img.alt || 'Selected image'; }
+          modalImg.src = full;
           if (modalCaption){ modalCaption.textContent = img.alt || ''; }
           modal.show();
         });
       });
     }
-
   });
 })();
